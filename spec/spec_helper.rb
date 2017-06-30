@@ -9,3 +9,5 @@ Capybara.app = BikeShareApp
 RSpec.configure do |c|
   c.include Capybara::DSL
 end
+
+DatabaseCleaner.strategy = :truncation
