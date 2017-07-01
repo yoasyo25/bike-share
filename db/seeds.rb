@@ -1,10 +1,33 @@
 require 'csv'
 require './app/models/station.rb'
+require './app/models/city.rb'
 
+City.destroy_all
 Station.destroy_all
-stations = CSV.open "./db/csv/station.csv", headers: true, header_converters: :symbol
 
-stations.each do |row|
-  Station.create!(name: row[:name], dock_count: row[:dock_count], city_id: row[:city_id], date_id: row[:date_id])
+def from_csv(file_path)
+  values = []
+  contents = CSV.open(file_path, headers: true, header_converters: :symbol)
+  contents.each { |row| values << row.to_h}
+  values
 end
-stations.close
+
+def seed_city_database(file_path)
+  csv = from_csv(file_path)
+  cities = csv.each do |row|
+    row.keep_if {|key, value| key == :city}
+  end
+  cities.uniq.each {|city| City.create!(city)}
+end
+
+def seed_station_database(file_path)
+  stations = from_csv(file_path)
+  stations.each do |station|
+    city = City.find_by(city: station[:city])
+    station.delete_if {|key, value| key == :lat || key == :long || key == :city}
+    city.stations.create(station)
+  end
+end
+
+seed_city_database("./db/csv/station.csv")
+seed_station_database("./db/csv/station.csv")
