@@ -4,5 +4,6 @@ class CreateDates < ActiveRecord::Migration[5.0]
       t.date :date
 
       t.timestamps null: false
+    end
   end
 end
