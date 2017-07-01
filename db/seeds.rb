@@ -24,7 +24,7 @@ def seed_station_database(file_path)
   stations = from_csv(file_path)
   stations.each do |station|
     city = City.find_by(city: station[:city])
-    station.delete_if {|key, value| key == :lat || key == :long || key == :city}
+    station.delete_if {|key, value| key == :lat || key == :long || key == :city || key == :id}
     city.stations.create(station)
   end
 end
