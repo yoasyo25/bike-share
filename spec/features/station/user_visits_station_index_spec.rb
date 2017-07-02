@@ -1,48 +1,50 @@
 RSpec.describe "User visits station index page and" do
 
-  it "sees link back to home page" do
-    # When I visit the station index page
+  before :each do
+    @city = City.create(city: "San Jose")
+    @station = Station.create(name: "San Jose Civic Center", dock_count: 11, city_id: @city.id,
+                              installation_date: "2017-08-30")
+  end
+
+  it "sees link to homepage and edit button" do
+
     visit '/stations'
-    # I should see a link back to the home page
+
     page.should have_selector(:link_or_button, 'Home')
-  end
-
-  it "sees a list of stations" do
-    station = Station.create(name: "One", dock_count: 1, city_id: 1, installation_date: "2017-08-30")
-    # When I visit the station index page
-    visit '/stations'
-    # I should see a list of all stations
-    page.should have_selector(:link_or_button, 'One')
-  end
-
-  it "sees an edit button for each station" do
-    station = Station.create(name: "One", dock_count: 1, city_id: 1, installation_date: "2017-08-30")
-    visit '/stations'
-    # I should see an edit button for each station
     page.should have_selector(:link_or_button, 'Edit')
   end
 
-  it "takes you to the individual station view when you click edit" do
-    station = Station.create(name: "One", dock_count: 1, city_id: 1, installation_date: "2017-08-30")
+  it "sees a the name of a station" do
+
     visit '/stations'
-    # Click the edit button for each station
+
+    expect(page).to have_content("San Jose Civic Center")
+  end
+
+  it "takes you to the individual station view when you click edit" do
+
+    visit '/stations'
+
     click_button('Edit')
 
-    expect(current_path).to eq "/stations/1"
-    expect(page).to have_content "One"
+    expect(current_path).to eq("/stations/#{@station.id}/edit")
+    expect(page).to have_content("San Jose Civic Center")
   end
 
   it "sees a delete button for each station" do
-    station = Station.create(name: "One", dock_count: 1, city_id: 1, installation_date: "2017-08-30")
+
     visit '/stations'
+
     expect(page).to have_button('Delete')
   end
 
   it "takes you back to the station index page when you click delete" do
-    station = Station.create(name: "One", dock_count: 1, city_id: 1, installation_date: "2017-08-30")
+
     visit '/stations'
+
     click_button('Delete')
+
     expect(current_path).to eq "/stations"
-    expect(page).to_not have_content "One"
+    expect(page).to_not have_content("San Jose Civic Center")
   end
 end
