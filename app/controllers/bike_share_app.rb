@@ -22,6 +22,16 @@ class BikeShareApp < Sinatra::Base
     erb :show
   end
 
+  get '/stations/:id/edit' do
+    @station = Station.find(params[:id])
+    erb :"stations/edit"
+  end
+
+  put '/stations/:id' do |id|
+    @station = Station.update(id.to_i, params[:station])
+    redirect "/stations/#{id}"
+  end
+
   post '/stations' do
     # require 'pry'; binding.pry
     if params[:station][:name] == "" || params[:station][:dock_count] == 0
@@ -32,4 +42,5 @@ class BikeShareApp < Sinatra::Base
       redirect "/stations/#{@station.id}"
     end
   end
+
 end
