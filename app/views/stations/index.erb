@@ -10,7 +10,7 @@
     <%= station.city_id %></p>
   <p><h4>Installation Date</h4><br/>
     <%= station.installation_date %></p>
-  <button type="submit">Edit</button>
+  <button type="submit"><a href="/stations/<% station.id %>">Edit</a></button>
   <form action="/stations/<%= station.id %>" method="post">
     <input type="hidden" name="_method" value="DELETE" />
     <input type="submit" value="Delete" />
