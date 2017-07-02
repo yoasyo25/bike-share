@@ -5,11 +5,11 @@
   </head>
   <body>
     <h1><%= @station.name %></h1>
-    <a href="/">Home</a>
-    <a href="/stations">All Stations</a>
-    <a href="/trips">All Trips</a>
-    <a href="#">Edit</a>
-    <a href="#">Delete</a>
+    <p><a href="/">Home</a></p>
+    <p><a href="/stations">All Stations</a></p>
+    <p><a href="/trips">All Trips</a></p>
+    <p><a href="#">Edit</a></p>
+    <p><a href="#">Delete</a></p>
     <select name='station[id]'>
       <% @all_stations.each do |station| %>
         <option value=<%= station.id %>><%= station.name %>></option>
