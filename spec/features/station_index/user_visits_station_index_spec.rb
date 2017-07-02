@@ -35,9 +35,14 @@ RSpec.describe "User visits station index page and" do
   it "sees a delete button for each station" do
     station = Station.create(name: "One", dock_count: 1, city_id: 1, installation_date: "2017-08-30")
     visit '/stations'
-    # page.should have_selector(:link_or_button, 'Delete')
     expect(page).to have_button('Delete')
   end
 
-
+  it "takes you back to the station index page when you click delete" do
+    station = Station.create(name: "One", dock_count: 1, city_id: 1, installation_date: "2017-08-30")
+    visit '/stations'
+    click_button('Delete')
+    expect(current_path).to eq "/stations"
+    expect(page).to_not have_content "One"
+  end
 end
