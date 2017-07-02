@@ -4,20 +4,24 @@ class BikeShareApp < Sinatra::Base
     erb :index
   end
 
-  # get '/stations/error'
-  #   erb :error
-  # end
-
   get '/stations/new' do
     @station = Station.all
     @city = City.all
     erb :new
   end
 
+  get '/stations/:id' do
+    @all_stations = Station.all
+    @station = Station.find(params[:id])
+    @city = City.all
+    erb :show
+  end
+
   post '/stations' do
     # require 'pry'; binding.pry
-    if params[:station[:name]] == nil
-      redirect "/stations/error"
+    if params[:station][:name] == "" || params[:station][:dock_count] == 0
+      @fields = params[:station].select {|key, value| key if value == ""}
+      erb :error
     else
       @station = Station.create(params[:station])
       redirect "/stations/#{@station.id}"
