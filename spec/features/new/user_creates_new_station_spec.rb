@@ -13,7 +13,7 @@ RSpec.describe "User Creates a new station" do
 
   it "signs up with out filling out the name field to error" do
     visit '/stations/new'
-    select("San Jose", :from => 'City)
+    # select("San Jose", :from => 'City')
     fill_in('station[installation_date]', :with => 12-12-12)
     fill_in('station[dock_count]', :with => 33)
     find_button('Create New Station').click
