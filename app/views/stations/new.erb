@@ -14,9 +14,10 @@
       <label for="">City</label>
       <p><select name="station[city_id]" value="">
         <% @city.each do |city| %>
-          <option value=<%= city.id %>><%= city.city %></option>
+          <option value="<% city.id %>"><%= city.city %></option>
         <% end %>
       </select></p>
+
       <label for="">Dock Count</label>
       <p><input type="integer" name="station[dock_count]" value=""></p>
       <label for="">Installation Date</label>
@@ -25,7 +26,3 @@
     </form>
   </body>
 </html>
-
-
-<!-- Build out the ability to select a drop down menu for day when with team -->
-<!-- Auto Populate a select and drop down method for cities -->

@@ -1,45 +1,36 @@
 RSpec.describe "User Creates a new station" do
   it "sees a form with name, city, dock count, and installation date" do
+
     visit '/stations/new'
-    # I should see a link to all stations
+
     expect(page).to have_content("Name")
+    expect(page).to have_content("Dock Count")
     expect(page).to have_content("City")
+    expect(page).to have_content("Installation Date")
   end
 
-  # it "sees a drop down of citys to select from"
-  #   visit '/stations/new'
-  #
-  # end
+  it "gets an error when submiting a form without filling in the name field" do
 
-  it "signs up with out filling out the name field to error" do
     visit '/stations/new'
-    select("San Jose", :from => 'City)
-    fill_in('station[installation_date]', :with => 12-12-12)
-    fill_in('station[dock_count]', :with => 33)
+
+    fill_in 'station[dock_count]', with: 33
+    fill_in 'station[installation_date]', with: "2018-04-06"
+    select "1", from: "city"
+
     find_button('Create New Station').click
 
     expect(page).to have_content('ERROR')
+    save_and_open_page
   end
 
-  it "sees link to trips" do
-    # As a User
-    #When I visit the Home page
+  it "sees a link to all trips, all stations, and the homepage" do
+
     visit '/stations/new'
 
     expect(page).to have_content("All Trips")
-  end
-
-  it "sees link to stations" do
-    # As a User
-    #When I visit the Home page
-    visit '/stations/new'
-
     expect(page).to have_content("All Stations")
-  end
-
-  it "link to home page" do
-    visit '/stations/new'
-
     expect(page).to have_content("Home")
   end
+
+
 end
