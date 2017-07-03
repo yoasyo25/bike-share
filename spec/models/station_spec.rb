@@ -117,10 +117,11 @@ RSpec.describe Station do
         expect(recent[0].name).to eq("Turing")
       end
 
-      it "shows the station object that was most recently installed multiple" do
+      it "shows the station object that was most recently installed out of 4 stations--2 the same" do
         station = Station.create(name: "Turing",dock_count: 12, city_id: 1, installation_date: "2017-7-02")
         station = Station.create(name: "SChool",dock_count: 12, city_id: 2, installation_date: "2012-1-11")
         station = Station.create(name: "OF",dock_count: 12, city_id: 1, installation_date: "2017-7-02")
+        station = Station.create(name: "SChool",dock_count: 12, city_id: 2, installation_date: "2013-2-14")
         recent = Station.most_recent_install_station
 
         expect(recent[0].name).to eq("Turing")
@@ -148,6 +149,18 @@ RSpec.describe Station do
         station = Station.create(name: "SChool",dock_count: 12, city_id: 2, installation_date: "2012-1-11")
         station = Station.create(name: "OF",dock_count: 12, city_id: 1, installation_date: "2017-7-02")
         station = Station.create(name: "Software",dock_count: 12, city_id: 1, installation_date: "2012-1-11")
+        recent = Station.oldest_installed_station
+
+        expect(recent[0].name).to eq("SChool")
+        expect(recent[1].name).to eq("Software")
+      end
+
+      it "shows the station object that was oldest out of 5 stations multiple oldies" do
+        station = Station.create(name: "Turing",dock_count: 12, city_id: 1, installation_date: "2017-7-02")
+        station = Station.create(name: "SChool",dock_count: 12, city_id: 2, installation_date: "2012-1-11")
+        station = Station.create(name: "OF",dock_count: 12, city_id: 1, installation_date: "2017-7-02")
+        station = Station.create(name: "Software",dock_count: 12, city_id: 1, installation_date: "2012-1-11")
+        station = Station.create(name: "OF",dock_count: 12, city_id: 1, installation_date: "2016-4-02")
         recent = Station.oldest_installed_station
 
         expect(recent[0].name).to eq("SChool")

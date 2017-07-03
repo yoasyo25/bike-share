@@ -30,7 +30,7 @@ class Station < ActiveRecord::Base
   end
 
   def self.most_recent_install
-    Station.order(:installation_date).first.installation_date
+    Station.order(:installation_date).last.installation_date
   end
 
   def self.most_recent_install_station
@@ -38,7 +38,7 @@ class Station < ActiveRecord::Base
   end
 
   def self.oldest_install
-    Station.order(:installation_date).last.installation_date
+    Station.order(:installation_date).first.installation_date
   end
 
   def self.oldest_installed_station
