@@ -31,40 +31,42 @@ def seed_station_database(file_path)
 end
 
 
-def seed_subscription_database(file_path)
-  csv = from_csv(file_path)
-  subscriptions = csv.each do |row|
-    row.keep_if {|key, value| key == :subscription_type}
-  end
-  subscriptions.uniq.each {|subscription| Subscription.create!(subscription)}
-end
+def seed_trips_database(file_path)
 
-def seed_dates_database(file_path)
-  csv = from_csv(file_path)
-  dates = csv.each do |row|
-    row.keep_if {|key, value| key == :start_date || key == :end_date}
-  end
-  dates.uniq.each {|date| BikeDate.create!(date)}
-end
+  csv = CSV.open(file_path, headers: true, header_converters: :symbol)
 
-def seed_trips_database
-  trips = from_csv(file_path)
-  trips.each do |trip|
+  csv.each_row do |row|
 
-    start_date = BikeDate.find_by(date: trip[:start_date])
-    start_station = Station.find_by(name: trip[:start_station])
-    end_date = BikeDate.find_by(date: trip[:end_date])
-    end_station = Station.find_by(name: trip[:end_station])
-    subscription_type = Subscription.find_by(subscription_type: trip[:subscription_type])
+    row.delete_if {|key, value| key == :start_station_id || key == :end_station_id, key == :id}
+    new_trip = Trip.create!(row)
 
-    trip[:start_date] = DateTime.strptime(trip[:start_date], "%m/%d/%Y")
-    trip[:end_date] = DateTime.strptime(trip[:end_date], "%m/%d/%Y")
+    start_station = Station.find_or_create_by!(name: row[:start_station_name])
+      start_station.trips << new_trip
 
-    new_trip = Trip.create!(trip)
+    start_date = BikeDate.find_or_create_by!(date: row[:start_date])
+      start_date.trips << new_trip
 
-    start_date.trips << new_trip
-    end_date.trips << new_trip
-    subscription_type.trips << new_trip
+    end_station = Station.find_or_create_by!(name: row[:end_station])
+      end_station.trips << new_trip
+
+    end_date = BikeDate.find_or_create_by!(date: row[:end_date])
+      end_date.trips << new_trip
+
+    bike = Bike.find_or_create_by!(bike: row[:bike_id])
+
+    subscription = Subscription.find_or_create_by!(name: row[:subscription_type])
+      subscription.trips << new_trip
+
+    zip = ZipCode.find_or_create_by!(zip_code: row[:zip_code])
+      zip.trips << new_trip
+
+    new_trip.update_attributes(start_station: start_station.id,
+                              start_date: start_date.id,
+                              end_station: end_station.id,
+                              end_date: end_date.id,
+                              bike_id: bike.id,
+                              subscription_type: subscription.id,
+                              zip_code: zip.id)
   end
 end
 
