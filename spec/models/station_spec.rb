@@ -102,8 +102,8 @@ RSpec.describe Station do
       end
 
       it "shows the station that was most recently installed" do
-        station = Station.create(name: "Turing",dock_count: 12, city_id: 1, installation_date: "2017-7-02")
-        station = Station.create(name: "SChool",dock_count: 12, city_id: 2, installation_date: "2012-1-11")
+        station = Station.create(name: "Turing",dock_count: 12, city_id: 1, installation_date: "2017-07-02")
+        station = Station.create(name: "SChool",dock_count: 12, city_id: 2, installation_date: "2012-01-11")
         recent = Station.most_recent_install.to_s
 
         expect(recent).to eq("2017-07-02")
@@ -129,16 +129,16 @@ RSpec.describe Station do
       end
 
       it "shows the station that was oldest installed station" do
-        station = Station.create(name: "Turing",dock_count: 12, city_id: 1, installation_date: "2017-7-02")
-        station = Station.create(name: "SChool",dock_count: 12, city_id: 2, installation_date: "2012-1-11")
+        station = Station.create(name: "Turing",dock_count: 12, city_id: 1, installation_date: "2017-07-02")
+        station = Station.create(name: "SChool",dock_count: 12, city_id: 2, installation_date: "2012-01-11")
         recent = Station.oldest_install.to_s
 
         expect(recent).to eq("2012-01-11")
       end
 
       it "shows the station object that was installed the longest ago" do
-        station = Station.create(name: "Turing",dock_count: 12, city_id: 1, installation_date: "2017-7-02")
-        station = Station.create(name: "SChool",dock_count: 12, city_id: 2, installation_date: "2012-1-11")
+        station = Station.create(name: "Turing",dock_count: 12, city_id: 1, installation_date: "2017-07-02")
+        station = Station.create(name: "SChool",dock_count: 12, city_id: 2, installation_date: "2012-01-11")
         recent = Station.oldest_installed_station
 
         expect(recent[0].name).to eq("SChool")
