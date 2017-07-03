@@ -25,10 +25,10 @@ RSpec.describe "User visits station index page and" do
 
     visit '/stations'
 
-    click_button('Edit')
+    click_link("Edit")
 
     expect(current_path).to eq("/stations/#{@station.id}/edit")
-    expect(page).to have_content("San Jose Civic Center")
+    expect(page).to have_content("Edit Station")
   end
 
   it "sees a delete button for each station" do
