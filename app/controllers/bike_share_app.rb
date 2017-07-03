@@ -15,7 +15,7 @@ class BikeShareApp < Sinatra::Base
     files
     erb :"/stations/index"
   end
-
+  
   get '/trips' do
     files
     # @trips = Trip.all

@@ -9,14 +9,14 @@ RSpec.describe "User updates a station" do
 
     visit '/stations'
 
-    click_button("Submit")
+    click_link("Edit")
 
     fill_in "station[name]",              with: "Oakland"
     fill_in "station[dock_count]",        with: 18
     fill_in "station[city_id]",           with: @city.id
     fill_in "station[installation_date]", with: "2018-04-06"
 
-    click_button("Edit")
+    click_button("Submit")
     expect(current_path).to eq("/stations/#{@station.id}")
     expect(page).to have_content("2018-04-06")
   end
