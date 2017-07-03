@@ -1,3 +1,4 @@
+
 require 'csv'
 require './app/models/station.rb'
 require './app/models/city.rb'
@@ -31,5 +32,47 @@ def seed_station_database(file_path)
 end
 
 
+def seed_trips_database(file_path)
+
+  csv = CSV.open(file_path, headers: true, header_converters: :symbol)
+
+  csv.each_row do |row|
+
+    row.delete_if {|key, value| key == :start_station_id || key == :end_station_id, key == :id}
+    new_trip = Trip.create!(row)
+
+    start_station = Station.find_or_create_by!(name: row[:start_station_name])
+      start_station.trips << new_trip
+
+    start_date = BikeDate.find_or_create_by!(date: row[:start_date])
+      start_date.trips << new_trip
+
+    end_station = Station.find_or_create_by!(name: row[:end_station])
+      end_station.trips << new_trip
+
+    end_date = BikeDate.find_or_create_by!(date: row[:end_date])
+      end_date.trips << new_trip
+
+    bike = Bike.find_or_create_by!(bike: row[:bike_id])
+
+    subscription = Subscription.find_or_create_by!(name: row[:subscription_type])
+      subscription.trips << new_trip
+
+    zip = ZipCode.find_or_create_by!(zip_code: row[:zip_code])
+      zip.trips << new_trip
+
+    new_trip.update_attributes(start_station: start_station.id,
+                              start_date: start_date.id,
+                              end_station: end_station.id,
+                              end_date: end_date.id,
+                              bike_id: bike.id,
+                              subscription_type: subscription.id,
+                              zip_code: zip.id)
+  end
+end
+
 seed_city_database("./db/csv/station.csv")
 seed_station_database("./db/csv/station.csv")
+seed_subscription_database("./db/csv/trip.csv")
+seed_dates_database("./db/csv/trip.csv")
+seed_trips_database("./db/csv/trip.csv")
