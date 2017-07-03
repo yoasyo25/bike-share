@@ -9,6 +9,10 @@ class BikeShareApp < Sinatra::Base
     erb :"/stations/index"
   end
 
+  get '/trips' do
+    @trip
+  end
+
   get '/stations/station-dashboard' do
     erb :stations_dashboard
   end
@@ -16,18 +20,19 @@ class BikeShareApp < Sinatra::Base
   get '/stations/new' do
     @station = Station.all
     @city = City.all
-    erb :new
+    erb :"stations/new"
   end
 
   get '/stations/:id' do
     @all_stations = Station.all
     @station = Station.find(params[:id])
     @city = City.all
-    erb :show
+    erb :"stations/show"
   end
 
   get '/stations/:id/edit' do
     @station = Station.find(params[:id])
+    @city = City.all
     erb :"stations/edit"
   end
 
@@ -37,14 +42,18 @@ class BikeShareApp < Sinatra::Base
   end
 
   post '/stations' do
-    # require 'pry'; binding.pry
     if params[:station][:name] == "" || params[:station][:dock_count] == 0
       @fields = params[:station].select {|key, value| key if value == ""}
-      erb :error
+      erb :"stations/error"
     else
       @station = Station.create(params[:station])
       redirect "/stations/#{@station.id}"
     end
+  end
+
+  delete '/stations/:id' do |id|
+    Station.destroy(id.to_i)
+    redirect '/stations'
   end
 
 end
