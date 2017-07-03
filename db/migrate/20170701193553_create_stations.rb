@@ -4,7 +4,7 @@ class CreateStations < ActiveRecord::Migration[5.0]
       t.string :name
       t.integer :dock_count
       t.integer :city_id
-      t.date :date_id
+      t.string :date_id
 
       t.timestamps null: false
     end
