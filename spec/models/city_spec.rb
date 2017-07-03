@@ -1,4 +1,4 @@
-RSpec.describe Station do
+RSpec.describe City do
   describe "Validations" do
     it "is invalid without a city name" do
       city = City.new(city: nil)
