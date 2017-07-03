@@ -18,7 +18,7 @@
         <option value=<%= station.id %>><%= station.name %></option>
       <% end %>
     </select>
-    <h3><%= (Station.most_recent_install_station)[0].name %> Is the newest station</h3>
+    <h3><%= (Station.most_recent_install_station).name %> Is the newest station</h3>
     <h3><% (Station.oldest_installed_station).each  do |station| %>
       <%= station.name + ", " %>
       <% end %>
