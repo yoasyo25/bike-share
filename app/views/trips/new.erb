@@ -37,7 +37,7 @@
         <p><input type="integer" name="trip[bike_id]" value=""></p>
 
       <label for="">Subscription Type:</label>
-        <p><select name="city">
+        <p><select name="trip[subscription_type]">
           <% @subscriptions.each do |subscription| %>
             <option value="<% subscription.id %>"><%= subscription.name %></option>
             <% end %>
