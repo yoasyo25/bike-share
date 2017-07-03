@@ -30,5 +30,6 @@ def seed_station_database(file_path)
   end
 end
 
+
 seed_city_database("./db/csv/station.csv")
 seed_station_database("./db/csv/station.csv")
