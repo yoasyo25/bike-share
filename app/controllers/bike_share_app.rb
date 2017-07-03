@@ -2,8 +2,8 @@ class BikeShareApp < Sinatra::Base
 
   def files
     @stations = Station.all
-    @cities = City.all
-    @trips = Trip.all
+    @city = City.all
+    # @trips = Trip.all
     nil
   end
 
@@ -15,7 +15,7 @@ class BikeShareApp < Sinatra::Base
     files
     erb :"/stations/index"
   end
-  
+
   get '/trips' do
     files
     # @trips = Trip.all
@@ -67,6 +67,11 @@ class BikeShareApp < Sinatra::Base
   put '/stations/:id' do |id|
     @station = Station.update(id.to_i, params[:station])
     redirect "/stations/#{id}"
+  end
+
+  put '/trips/:id' do |id|
+    @trip = Trip.update(id.to_i, params[:trip])
+    redirect "/trips/#{id}"
   end
 
   post '/stations' do
