@@ -11,5 +11,6 @@ class CreateTrips < ActiveRecord::Migration[5.0]
       t.integer :zip_code
 
       t.timestamps null: false
+    end
   end
 end

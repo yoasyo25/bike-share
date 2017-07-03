@@ -2,6 +2,10 @@
 require 'csv'
 require './app/models/station.rb'
 require './app/models/city.rb'
+require './app/models/trip.rb'
+require './app/models/bike.rb'
+require './app/models/zip_code.rb'
+require './app/models/subscription.rb'
 
 City.destroy_all
 Station.destroy_all
@@ -36,18 +40,19 @@ def seed_trips_database(file_path)
 
   csv = CSV.open(file_path, headers: true, header_converters: :symbol)
 
-  csv.each_row do |row|
+  csv.each do |row|
 
-    row.delete_if {|key, value| key == :start_station_id || key == :end_station_id, key == :id}
-    new_trip = Trip.create!(row)
+    row.delete_if {|key, value| key == :start_station_id || key == :end_station_id || key == :id}
+    new_trip = Trip.create({duration: row[:duration], start_date: 1, start_station: "A", end_date: 1, end_station: "B", bike_id: 1, subscription_type: 1, zip_code: 1 })
 
     start_station = Station.find_or_create_by!(name: row[:start_station_name])
+      require 'pry'; binding.pry
       start_station.trips << new_trip
 
     start_date = BikeDate.find_or_create_by!(date: row[:start_date])
       start_date.trips << new_trip
 
-    end_station = Station.find_or_create_by!(name: row[:end_station])
+    end_station = Station.find_or_create_by!(name: row[:end_station_name])
       end_station.trips << new_trip
 
     end_date = BikeDate.find_or_create_by!(date: row[:end_date])
@@ -73,6 +78,4 @@ end
 
 seed_city_database("./db/csv/station.csv")
 seed_station_database("./db/csv/station.csv")
-seed_subscription_database("./db/csv/trip.csv")
-seed_dates_database("./db/csv/trip.csv")
-seed_trips_database("./db/csv/trip.csv")
+seed_trips_database("./db/csv/tiny_trip.csv")
