@@ -2,8 +2,8 @@ class BikeShareApp < Sinatra::Base
 
   def files
     @stations = Station.all
-    @cities = City.all
-    @trips = Trip.all
+    @city = City.all
+    # @trips = Trip.all
     nil
   end
 
@@ -15,7 +15,7 @@ class BikeShareApp < Sinatra::Base
     files
     erb :"/stations/index"
   end
-  
+
   get '/trips' do
     files
     # @trips = Trip.all
