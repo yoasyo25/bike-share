@@ -12,7 +12,7 @@
         <option value=<%= station.id %>><%= station.name %></option>
       <% end %>
     </select>
-    <h3>Stations With least Bikes --- <%= Station.least_available %> Available @ </h3>
+    <h3>Stations with least Bikes --- <%= Station.least_available %> Available @ </h3>
     <select class="" name="stations[name]">
       <% Station.stations_with_least_bikes_available.each do |station| %>
         <option value=<%= station.id %>><%= station.name %></option>

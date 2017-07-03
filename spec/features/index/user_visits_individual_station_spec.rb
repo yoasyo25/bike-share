@@ -3,7 +3,10 @@ RSpec.describe "User visits individual station" do
     # As a user
     # When I visit the first station's page
 
-    station = Station.create(name: , dock_count: , city_id: , installation_date: )
+    station = Station.create(name: "San Jose Diridon Caltrain Station",
+                       dock_count: 27,
+                           city_id: 1,
+                 installation_date: "2013-06-08")
 
     visit "/station/#{station.id}"
 
