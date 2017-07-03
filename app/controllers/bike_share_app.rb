@@ -1,39 +1,67 @@
 class BikeShareApp < Sinatra::Base
 
+  def files
+    @stations = Station.all
+    @cities = City.all
+    @trips = Trip.all
+    nil
+  end
+
   get '/' do
     erb :index
   end
 
   get '/stations' do
-    @stations = Station.all
+    files
     erb :"/stations/index"
   end
   
   get '/trips' do
-    @trip
+    files
+    # @trips = Trip.all
+    erb :"/trips/index"
   end
 
-  get '/stations/station-dashboard' do
+  get '/stations/stations-dashboard' do
     erb :stations_dashboard
   end
 
+  # get '/trips/trips-dashboard' do
+  #   erb :trips_dashboard
+  # end
+
   get '/stations/new' do
-    @station = Station.all
-    @city = City.all
+    files
     erb :"stations/new"
   end
 
+  get '/trips/new' do
+    files
+    erb :"trips/new"
+  end
+
   get '/stations/:id' do
-    @all_stations = Station.all
+    files
     @station = Station.find(params[:id])
-    @city = City.all
     erb :"stations/show"
   end
 
+  get '/trips/:id' do
+    files
+    # @trip = Trip.find(params[:id])
+    erb :"trips/show"
+  end
+
   get '/stations/:id/edit' do
+    files
     @station = Station.find(params[:id])
-    @city = City.all
     erb :"stations/edit"
+  end
+
+  get '/trips/:id/edit' do
+    files
+    # @trip = Trip.find(params[:id])
+    erb :'trips/edit'
   end
 
   put '/stations/:id' do |id|
@@ -55,5 +83,10 @@ class BikeShareApp < Sinatra::Base
     Station.destroy(id.to_i)
     redirect '/stations'
   end
+
+  # delete '/trips/:id' do |id|
+  #   # Trip.destroy(id.to_i)
+  #   redirect '/trips'
+  # end
 
 end
