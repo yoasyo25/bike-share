@@ -69,6 +69,11 @@ class BikeShareApp < Sinatra::Base
     redirect "/stations/#{id}"
   end
 
+  put '/trips/:id' do |id|
+    @trip = Trip.update(id.to_i, params[:trip])
+    redirect "/trips/#{id}"
+  end
+
   post '/stations' do
     if params[:station][:name] == "" || params[:station][:dock_count] == 0
       @fields = params[:station].select {|key, value| key if value == ""}
