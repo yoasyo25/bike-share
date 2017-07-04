@@ -34,7 +34,7 @@ RSpec.describe "User visits Trips page" do
     click_link("Edit")
 
     expect(current_path).to eq("/trips/#{@trip.id}/edit")
-    expect(page).to have_content("Edit Station")
+    expect(page).to have_content("Edit")
   end
 
   it "sees a delete button for each trips" do
