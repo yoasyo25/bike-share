@@ -37,5 +37,5 @@ RSpec.describe Bike do
 
       expect(total_rides).to eq("?????")
     end
-    
+
   end
