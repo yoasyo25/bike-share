@@ -1,4 +1,11 @@
 RSpec.describe "User visits station dashboard and" do
+
+  before :each do
+    @city = City.create(city: "San Jose")
+    @station = Station.create(name: "San Jose Civic Center", dock_count: 11, city_id: @city.id,
+                              installation_date: "2017-08-30")
+  end
+
   it "sees total stations" do
     # When I visit the station dashboard page
     visit '/stations/station-dashboard'
