@@ -27,8 +27,5 @@ end
 
 
 
-
-
-
 # Single date with the highest number of trips with a count of those trips.
 # Single date with the lowest number of trips with a count of those trips.
