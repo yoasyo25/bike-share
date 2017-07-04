@@ -10,7 +10,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips' do
-    @trip
+    @trips = Trip.all
   end
 
   get '/stations/station-dashboard' do

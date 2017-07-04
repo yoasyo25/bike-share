@@ -1,0 +1,40 @@
+<h1>Station Index</h1>
+
+<p><a href="#">All Trips</a> | <a href="/stations/new">Create New Station</a> | <a href="/">Home</a></p>
+
+
+<div class="container">
+
+  <table class="table">
+
+    <thead>
+      <th>#</th>
+      <th>Station</th>
+      <th>Dock Count</th>
+      <th>City</th>
+      <th>Installation Date</th>
+    </thead>
+
+    <tbody>
+    <% @trips.each do |trip| %>
+      <tr>
+        <th scope="row"><%= trip.id %></th>
+          <td><a href="/trips/<%= trip.id %>"><%= trip.start_date %></a></td>
+          <td><%= trip.end_date %></td>
+          <td><%= trip.duration %></td>
+          <td><%= trip.start_station %></td>
+          <td><%= trip.end_station %></td>
+          <td><%= trip.bike_id %></td>
+          <td><%= trip.subscription_type %></td>
+          <td><%= trip.zipcode %></td>
+          <td><button type="button"><a href="/stations/<%= trip.id %>/edit">Edit</a></button></td>
+          <td><form action="/stations/<%= trip.id %>" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            <input type="submit" value="Delete" />
+            </form></td>
+    <% end %>
+  </tbody>
+
+</table>
+
+</div>
