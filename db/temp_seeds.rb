@@ -37,10 +37,11 @@ def seed_trips_database(file_path)
 
   csv.each_row do |row|
 
-    row.delete_if {|key, value| key == :start_station_id || key == :end_station_id, key == :id}
-    new_trip = Trip.create!(row)
+    row.delete_if {|key, value| key == :id}
+    new_trip = Trip.create!({duration: row[:duration], start_date: 1, start_station_name: "A", start_station_id: 1, end_date: 2, end_station_name: "B", end_station_id: 2, bike_id: 1, subscription_type: 1, zip_code: 1})
 
     start_station = Station.find_or_create_by!(name: row[:start_station_name])
+      # Some sort of SQL magic here
       start_station.trips << new_trip
 
     start_date = BikeDate.find_or_create_by!(date: row[:start_date])
@@ -60,10 +61,12 @@ def seed_trips_database(file_path)
     zip = ZipCode.find_or_create_by!(zip_code: row[:zip_code])
       zip.trips << new_trip
 
-    new_trip.update_attributes(start_station: start_station.id,
-                              start_date: start_date.id,
-                              end_station: end_station.id,
+    new_trip.update_attributes(start_date: start_date.id,
+                              start_station_name: start_station.name,
+                              start_station_id: start_station.id
                               end_date: end_date.id,
+                              end_station_name: end_station.name
+                              end_station_id: end_station.id,
                               bike_id: bike.id,
                               subscription_type: subscription.id,
                               zip_code: zip.id)
@@ -74,7 +77,7 @@ seed_city_database("./db/csv/station.csv")
 seed_station_database("./db/csv/station.csv")
 seed_subscription_database("./db/csv/trip.csv")
 seed_dates_database("./db/csv/trip.csv")
-seed_trips_database("./db/csv/trip.csv")
+seed_trips_database("./db/csv/tiny_trip.csv")
 # require 'csv'
 # require './app/models/station.rb'
 # require './app/models/city.rb'

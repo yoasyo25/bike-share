@@ -1,10 +1,13 @@
 class Station < ActiveRecord::Base
-  has_many :trips
+  has_many :started_trips, :class_name => "Trip", :foreign_key => :id
+  has_many :ended_trips, :class_name => "Trip", :foreign_key => :id
+
   belongs_to :city
   validates :name, presence: true
   validates :dock_count, presence: true
   validates :city_id, presence: true
   validates :installation_date, presence: true
+
 
   def self.total_stations
     Station.count
