@@ -6,4 +6,5 @@ class Trip < ActiveRecord::Base
   belongs_to :bike, :class_name => "Bike", :foreign_key => :bike_id
   belongs_to :subscription, :class_name => "Subscription", :foreign_key => :subscription_type
   belongs_to :zip, :class_name => "ZipCode", :foreign_key => :zip_code
+ 
 end

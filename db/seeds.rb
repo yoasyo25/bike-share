@@ -47,11 +47,15 @@ end
 
 def seed_trips_database(file_path)
 
+  time = Time.now
+
   csv = CSV.open(file_path, headers: true, header_converters: :symbol)
 
   csv.each do |row|
 
     row.delete_if {|key, value| key == :start_station_id || key == :end_station_id || key == :id}
+
+    Trip.transaction do
 
     starting_station = Station.find_by(name: row[:start_station_name])
 
@@ -75,10 +79,14 @@ def seed_trips_database(file_path)
                               bike_id: trip_bike.id,
                               subscription_type: trip_subscription.id,
                               zip_code: trip_zip.id})
+    end
 
   end
+
+  system 'Say "Finished Seeding Trips Database!"'
+  puts Time.now - time
 end
 
 seed_city_database("./db/csv/station.csv")
 seed_station_database("./db/csv/station.csv")
-seed_trips_database("./db/csv/tiny_trip.csv")
+seed_trips_database("./db/csv/trip.csv")
