@@ -53,32 +53,32 @@ def seed_trips_database(file_path)
 
   csv.each do |row|
 
-    row.delete_if {|key, value| key == :start_station_id || key == :end_station_id || key == :id}
+    # no more of this nonsense - just don't assign trip with that attribute
 
     Trip.transaction do
 
-    starting_station = Station.find_by(name: row[:start_station_name])
+    starting_station = Station.find_by(station_id: row[:start_station_id]).id
 
-    starting_date = BikeDate.find_or_create_by!(date: DateTime.strptime(row[:start_date], '%m/%d/%Y %H:%M'))
+    starting_date = BikeDate.find_or_create_by!(date: DateTime.strptime(row[:start_date], '%m/%d/%Y %H:%M')).id
 
-    ending_station = Station.find_by(name: row[:end_station_name])
+    ending_station = Station.find_by(station_id: row[:end_station_id]).id
 
-    ending_date = BikeDate.find_or_create_by!(date: DateTime.strptime(row[:end_date], '%m/%d/%Y %H:%M'))
+    ending_date = BikeDate.find_or_create_by!(date: DateTime.strptime(row[:end_date], '%m/%d/%Y %H:%M')).id
 
-    trip_bike = Bike.find_or_create_by!(bike: row[:bike_id].to_i)
+    trip_bike = Bike.find_or_create_by!(bike: row[:bike_id].to_i).id
 
-    trip_subscription = Subscription.find_or_create_by!(subscription_type: row[:subscription_type])
+    trip_subscription = Subscription.find_or_create_by!(subscription_type: row[:subscription_type]).id
 
-    trip_zip = ZipCode.find_or_create_by!(zip_code: row[:zip_code].to_i)
+    trip_zip = ZipCode.find_or_create_by!(zip_code: row[:zip_code].to_i).id
 
     new_trip = Trip.create!({duration: row[:duration].to_i,
-                              start_station: starting_station.id,
-                              start_date: starting_date.id,
-                              end_station: ending_station.id,
-                              end_date: ending_date.id,
-                              bike_id: trip_bike.id,
-                              subscription_type: trip_subscription.id,
-                              zip_code: trip_zip.id})
+                              start_station: starting_station,
+                              start_date: starting_date,
+                              end_station: ending_station,
+                              end_date: ending_date,
+                              bike_id: trip_bike,
+                              subscription_type: trip_subscription,
+                              zip_code: trip_zip})
     end
 
   end
