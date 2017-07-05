@@ -6,6 +6,7 @@ require './app/models/bike.rb'
 require './app/models/zip_code.rb'
 require './app/models/subscription.rb'
 require './app/models/bikedate.rb'
+require './app/models/weather.rb'
 
 Station.destroy_all
 City.destroy_all
