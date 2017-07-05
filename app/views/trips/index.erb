@@ -1,0 +1,36 @@
+<h1>Trips</h1>
+
+<p><a href="/trips">All Trips</a> | <a href="/trips/new">Create New Trip</a> | <a href="/">Home</a></p>
+
+
+<div class="container">
+
+  <table class="table">
+
+    <thead>
+      <th> Trip # </th>
+      <th>Start Station</th>
+      <th>Date</th>
+      <th>End Station</th>
+      <th>Duration</th>
+    </thead>
+
+    <tbody>
+    <% @stations.each do |station| %>
+      <tr>
+        <th scope="row"><%= station.id %></th>
+          <td><a href="/stations/<%= station.id %>"><%= station.name %></a></td>
+          <td><%= station.dock_count %></td>
+          <td><%= station.city_id %></td>
+          <td><%= station.installation_date %></td>
+          <td><button type="button"><a href="/stations/<%= station.id %>/edit">Edit</a></button></td>
+          <td><form action="/stations/<%= station.id %>" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            <input type="submit" value="Delete" />
+            </form></td>
+    <% end %>
+  </tbody>
+
+</table>
+
+</div>
