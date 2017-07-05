@@ -6,10 +6,9 @@ class Trip < ActiveRecord::Base
   belongs_to :bike, :class_name => "Bike", :foreign_key => :bike_id
   belongs_to :subscription, :class_name => "Subscription", :foreign_key => :subscription_type
   belongs_to :zip, :class_name => "ZipCode", :foreign_key => :zip_code
-
   validates :duration, presence: true
   validates :start_date, presence: true
-  validates :start_stations, presence: true
+  validates :start_station, presence: true
   validates :end_date, presence: true
   validates :end_station, presence: true
   validates :bike_id, presence: true

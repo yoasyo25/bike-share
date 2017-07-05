@@ -23,7 +23,7 @@
           <td><%= station.dock_count %></td>
           <td><%= station.city_id %></td>
           <td><%= station.installation_date %></td>
-          <td><button type="button"><a href="/stations/<%= station.id %>/edit">Edit</a></button></td>
+          <td><button class="type="button"><a href="/stations/<%= station.id %>/edit">Edit</a></button></td>
           <td><form action="/stations/<%= station.id %>" method="post">
             <input type="hidden" name="_method" value="DELETE" />
             <input type="submit" value="Delete" />
