@@ -3,7 +3,7 @@ class CreateTrips < ActiveRecord::Migration[5.0]
     create_table :trips do |t|
       t.integer :duration
       t.integer :start_date
-      t.belongs_to :station, foreign_key: true
+      t.integer :start_station
       t.integer :end_date
       t.integer :end_station
       t.integer :bike_id
