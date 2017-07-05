@@ -20,7 +20,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Stations <span class="caret"></span></a>
         <% Station.stations_with_most_bikes_available.each do |station| %>
         <ul>
-          <li><a href="/stations/<%= station.id %>"><%= station.name %></a></li>
+          <li><a href="/stations/<%= station.id %>"><% station.name %></a></li>
         </ul>
         <% end %>
       </li>
