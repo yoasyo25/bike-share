@@ -6,10 +6,8 @@
 
   <h1><%= @trip.name %></h1>
 
-  <p><a href="/">Home</a> | <a href="/stations">All Stations</a> | <a href="/trips">All Trips</a> | <a href="#">Edit</a> | <a href="#">Delete</a></p>
-
   <body>
-    <h1>Duration: <%= @trip.duration %></h1>
+    <h3>Duration: <%= @trip.duration %></h3>
     <div class="container">
 
       <table class="table">
@@ -24,12 +22,12 @@
 
         <tbody>
           <tr>
-            <th scope="row>"><%= (@stations.find(@trip.start_station)).name %></th>
-              <td><%= (@stations.find(@trip.end_station)).name %></td>
-              <td><%= (@dates.find(@trip.start_date)).date %></td>
-              <td><%= (@dates.find(@trip.end_date)).date %></td>
-              <td><%= (@dates.find(@trip.end_date)).date %></td>
-              <td><%= (@trip.bike_id) %></td>
+            <th scope="row>"><%= (Stations.find(@trip.start_station)).name %></th>
+              <td><%= (Stations.find(@trip.end_station)).name %></td>
+              <td><%= (Dates.find(@trip.start_date)).date %></td>
+              <td><%= (Dates.find(@trip.end_date)).date %></td>
+              <td><%= (Dates.find(@trip.end_date)).date %></td>
+              <td><%= (Trip.bike_id) %></td>
         </tbody>
       </table>
     </div>
