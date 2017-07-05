@@ -26,7 +26,7 @@ RSpec.describe "User visits weather index page and" do
 
     click_link("Edit")
 
-    expect(current_path). to eq ("/weather/#{@weather.id}/edit")
+    expect(current_path). to eq ("/weather/#{@weather_day.id}/edit")
     expect(page).to have_content("Edit Weather")
   end
 
