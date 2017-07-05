@@ -6,7 +6,7 @@ RSpec.describe "User visits weather index page and" do
   end
 
   it "sees weather index, link to station index, link to trip index, link to create new weather day, link to home"
-    visit '/weather'
+    visit '/conditions'
 
     expect(page).to have_content "Weather Index"
     page.should have_selector(:link_or_button, 'All Stations')
@@ -16,32 +16,32 @@ RSpec.describe "User visits weather index page and" do
   end
 
   it "sees the weather days in the database"
-    visit '/weather'
+    visit '/conditions'
 
     expect(page).to have_content "April 19, 2017"
   end
 
   it "takes you to the individual weather day view when you click edit"
-    visit '/weather'
+    visit '/conditions'
 
     click_link("Edit")
 
-    expect(current_path). to eq ("/weather/#{@weather_day.id}/edit")
+    expect(current_path). to eq ("/conditions/#{@weather_day.id}/edit")
     expect(page).to have_content("Edit Weather")
   end
 
   it "sees a delete button for each weather day" do
-    visit '/weather'
+    visit '/conditions'
 
     expect(page).to have_button("Delete")
   end
 
   it "takes you back to the weather index page when you click delete" do
-    visit '/weather'
+    visit '/conditions'
 
     click_button('Delete')
 
-    expect(current_path).to eq "/stations"
+    expect(current_path).to eq "/condition"
     expect(page).to_not have_content("April 29, 2017")
   end
 

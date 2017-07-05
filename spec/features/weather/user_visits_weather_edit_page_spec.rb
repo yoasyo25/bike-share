@@ -6,11 +6,11 @@ RSpec.describe "User edits a weather day" do
   end
 
   it "can update a weather day from /weather"
-    visit "/weather"
+    visit "/conditions"
 
     click_link("Edit")
 
-    expect(current_path).to eq("/weather/#{@weather_day.id}/edit")
+    expect(current_path).to eq("/conditions/#{@weather_day.id}/edit")
 
     fill_in "weather[name]", with: "2017-04-18"
     fill_in "weather[max_temp]", with: 75.0
@@ -23,12 +23,12 @@ RSpec.describe "User edits a weather day" do
 
     click_button("Submit")
 
-    expect(current_path).to eq("/weather/#{@weather_day.id}")
+    expect(current_path).to eq("/conditions/#{@weather_day.id}")
     expect(page).to have_content("April 18, 2017")
   end
 
-  it "can update a weather day from '/weather/#{@weather_day.id}/edit'"
-    visit '/weather/#{@weather_day.id}/edit'
+  it "can update a weather day from '/conditions/#{@weather_day.id}/edit'"
+    visit '/conditions/#{@weather_day.id}/edit'
 
     fill_in "weather[name]", with: "2017-04-18"
     fill_in "weather[max_temp]", with: 75.0
@@ -41,7 +41,7 @@ RSpec.describe "User edits a weather day" do
 
     click_button("Submit")
 
-    expect(current_path).to eq("/weather/#{@weather_day.id}")
+    expect(current_path).to eq("/conditions/#{@weather_day.id}")
     expect(page).to have_content("April 18, 2017")
   end
 

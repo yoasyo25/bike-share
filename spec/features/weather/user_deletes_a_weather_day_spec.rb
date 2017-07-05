@@ -4,11 +4,11 @@ RSpec.describe "User visits the weather index page and" do
     @weather_date = BikeDate.create("2017-04-19")
     @weather_day = Weather.create(date: @weather_date.id, max_temp: 85.0, mean_temp: 83.0, min_temp: 81.0, mean_humidity: 77.0, mean_visibility: 7.0, mean_wind: 12.0, precipitation: 1.0)
 
-    visit '/weather'
+    visit '/conditions'
 
     click_button("Delete")
 
-    expect(current_path).to eq("/weather")
+    expect(current_path).to eq("/conditions")
     expect(page).to_not have_content("April 19, 2017")
   end
 end

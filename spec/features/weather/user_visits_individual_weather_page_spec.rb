@@ -4,7 +4,7 @@ RSpec.describe "User visits individual weather day" do
     @weather_date = BikeDate.create("2017-04-19")
     @weather_day = Weather.create(date: @weather_date.id, max_temp: 85.0, mean_temp: 83.0, min_temp: 81.0, mean_humidity: 77.0, mean_visibility: 7.0, mean_wind: 12.0, precipitation: 1.0)
 
-    visit '/weather/#{@weather_day.id}'
+    visit '/conditions/#{@weather_day.id}'
 
     expect(current_path).to eq "/weather/#{@weather_day.id}"
     expect(page).to have_content("April 19, 2017")

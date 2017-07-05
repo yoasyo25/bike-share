@@ -1,7 +1,7 @@
 RSpec.describe "User creates a new weather day and" do
 
   it "sees a form with date, max temp, mean temp, min temp, mean humidity, mean visibility, mean wind speed, and precipitation" do
-    visit '/weather/new'
+    visit '/conditions/new'
 
     expect(page).to have_content("Date")
     expect(page).to have_content("Max Temp")
@@ -14,7 +14,7 @@ RSpec.describe "User creates a new weather day and" do
   end
 
   it "doesn't fill in all fields and gets an error message" do
-    visit '/weather/new'
+    visit '/conditions/new'
 
     fill_in "weather[name]", with: "2017-04-18"
     fill_in "weather[max_temp]", with: 75.0
@@ -26,7 +26,7 @@ RSpec.describe "User creates a new weather day and" do
   end
 
   it "sees a link to all weather, trips, stations, and home"
-    visit '/weather/new'
+    visit '/conditions/new'
 
     page.should have_selector(:link_or_button, 'All Stations')
     page.should have_selector(:link_or_button, 'All Trips'
