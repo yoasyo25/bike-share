@@ -42,6 +42,8 @@ def seed_station_database(file_path)
   end
   Station.create!(name: "San Jose Government Center", dock_count: 15, city_id: 1, installation_date: DateTime.strptime("8/12/2013","%m/%d/%Y").strftime("%F"), station_id: 25)
   Station.create!(name: "Broadway at Main", dock_count: 15, city_id: 2, installation_date: DateTime.strptime("12/31/2013", "%m/%d/%Y").strftime("%F"), station_id: 80)
+  Station.create!(name: "Post at Kearny", dock_count: 19, city_id: 5, installation_date: DateTime.strptime("8/19/2013", "%m/%d/%Y").strftime("%F"), station_id: 47)
+  Station.create!(name: "Washington at Kearny", dock_count: 19, city_id: 5, installation_date: DateTime.strptime("8/19/2013", "%m/%d/%Y").strftime("%F"), station_id: 46)
 end
 
 
@@ -50,6 +52,8 @@ def seed_trips_database(file_path)
   time = Time.now
 
   csv = CSV.open(file_path, headers: true, header_converters: :symbol)
+
+  counter = 0
 
   csv.each do |row|
 
@@ -80,6 +84,8 @@ def seed_trips_database(file_path)
                               subscription_type: trip_subscription,
                               zip_code: trip_zip})
     end
+
+    puts counter += 1
 
   end
 
