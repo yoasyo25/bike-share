@@ -10,7 +10,7 @@
       <label for="">Name:</label>
       <p><input type="textfield" name="station[name]" value=""></p>
       <label for="">City</label>
-      <p><select name="station[city_id]" value="">
+      <p><select name="city">
         <% @city.each do |city| %>
           <option value="<% city.id %>"><%= city.city %></option>
         <% end %>

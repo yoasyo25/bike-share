@@ -15,12 +15,10 @@ RSpec.describe "User Creates a new station" do
 
     fill_in 'station[dock_count]', with: 33
     fill_in 'station[installation_date]', with: "2018-04-06"
-    select "1", from: "city"
 
     find_button('Create New Station').click
 
     expect(page).to have_content('ERROR')
-    save_and_open_page
   end
 
   it "sees a link to all trips, all stations, and the homepage" do
