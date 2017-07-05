@@ -30,10 +30,15 @@ class Trip < ActiveRecord::Base
 
 
   def self.start_station_with_most_rides
-    # Station with the most rides as a starting place.
+    trip_by_station = Trip.group(:start_station).count
+    most_trips = trip_by_station.max_by {|k,v| v}
+    Station.find(most_trips[0]).name
   end
 
   def self.end_station_with_most_rides
+    trip_by_station = Trip.group(:end_station).count
+    most_trips = trip_by_station.max_by {|k,v| v}
+    Station.find(most_trips[0]).name
     # Station with the most rides as an ending place.
   end
 
