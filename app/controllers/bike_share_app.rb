@@ -1,4 +1,5 @@
 class BikeShareApp < Sinatra::Base
+  include WillPaginate::Sinatra::Helpers
 
   def files
     @stations = Station.all
@@ -19,7 +20,9 @@ class BikeShareApp < Sinatra::Base
 
   get '/trips' do
     files
-    erb :"/trips/index"
+    # @trips = Trip.paginate(:page => params[:page], :per_page => 30)
+    @trips = Trip.all
+    erb :"trips/index"
   end
 
   get '/stations/stations-dashboard' do

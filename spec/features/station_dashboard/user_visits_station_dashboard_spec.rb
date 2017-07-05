@@ -26,7 +26,7 @@ RSpec.describe "User visits station dashboard and" do
     # When I visit the station dashboard page
     visit '/stations/station-dashboard'
     # I should see a total number of stations
-    expect(page).to have_content('Stations With Most Bikes')
+    expect(page).to have_content("Stations With Most Bikes")
   end
 
   it "sees stations with least bikes" do
