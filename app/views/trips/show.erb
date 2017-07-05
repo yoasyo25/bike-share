@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title> Trip <%= @trip.id %> </title>
+  </head>
+
+  <h1><%= @trip.name %></h1>
+
+  <p><a href="/">Home</a> | <a href="/stations">All Stations</a> | <a href="/trips">All Trips</a> | <a href="#">Edit</a> | <a href="#">Delete</a></p>
+
+  <body>
+    <h1>Duration: <%= @trip.duration %></h1>
+    <div class="container">
+
+      <table class="table">
+
+        <thead>
+          <th> Start Station</th>
+          <th>End Station</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Bike</th>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope="row>"><%= (@stations.find(@trip.start_station)).name %></th>
+              <td><%= (@stations.find(@trip.end_station)).name %></td>
+              <td><%= (@dates.find(@trip.start_date)).date %></td>
+              <td><%= (@dates.find(@trip.end_date)).date %></td>
+              <td><%= (@dates.find(@trip.end_date)).date %></td>
+              <td><%= (@trip.bike_id) %></td>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

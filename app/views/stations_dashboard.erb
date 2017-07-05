@@ -1,10 +1,6 @@
 <<<<<<< HEAD
 <h1>Station Dashboard</h1>
 
-<div class="">
-  <p><a href="/">Home</a> | <a href="/stations">All Stations</a></p></br>
-</div>
-
 <div class="album">
   <div class="jumbotron container">
     <div class="row">
@@ -21,11 +17,14 @@
 
     <div class="col-md-6">
       <h3>Stations With Most Bikes</h3>
-      <select class="" name="stations[name]">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Stations <span class="caret"></span></a>
         <% Station.stations_with_most_bikes_available.each do |station| %>
-          <option value=<%= station.id %>><%= station.name %></option>
+        <ul>
+          <li><a href="/stations/<%= station.id %>"><%= station.name %></a></li>
+        </ul>
         <% end %>
-      </select>
+      </li>
       <h5>Number of Bikes: <%= Station.most_available %></h5>
     </div>
 
