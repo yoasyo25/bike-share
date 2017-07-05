@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 14) do
   create_table "trips", force: :cascade do |t|
     t.integer  "duration"
     t.integer  "start_date"
-    t.integer  "station_id"
+    t.integer  "start_station"
     t.integer  "end_date"
     t.integer  "end_station"
     t.integer  "bike_id"
@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 14) do
     t.integer  "zip_code"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.index ["station_id"], name: "index_trips_on_station_id", using: :btree
   end
 
   create_table "zip_codes", force: :cascade do |t|
@@ -69,5 +68,4 @@ ActiveRecord::Schema.define(version: 14) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "trips", "stations"
 end
