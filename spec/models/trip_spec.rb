@@ -12,6 +12,8 @@ RSpec.describe Trip do
     city_id: @city_2.id, installation_date: "2017-08-30")
 
     @bike_id = Bike.create(bike: 1)
+    @bike_2 = Bike.create(bike: 2)
+
 
     @subscription_type = Subscription.create(subscription_type: "Customer")
 
@@ -23,7 +25,7 @@ RSpec.describe Trip do
 
     @trip_2 = Trip.create(duration: 200, start_date: @start_date.id, start_station: @start_station.id,
     end_station: @end_station.id, end_date: @end_date.id,
-    bike_id: @bike_id.id, subscription_type: @subscription_type.id, zip_code: @zip_code.id)
+    bike_id: @bike_2.id, subscription_type: @subscription_type.id, zip_code: @zip_code.id)
 
     @trip_3 = Trip.create(duration: 400, start_date: @start_date.id, start_station: @start_station.id,
     end_station: @end_station.id, end_date: @end_date.id,
@@ -136,6 +138,31 @@ RSpec.describe Trip do
     #     expect(monthly_breakdown_of_rides_per_year).to eq("?????")
     #   end
 
+      it "shows most ridden bike" do
+        most_ridden_bike = Trip.most_ridden_bike
+
+        expect(most_ridden_bike).to eq(@bike_id.id)
+      end
+
+      it "it shows total number of rides for most ridden bike" do
+
+        total_rides = Trip.total_rides_for_most_ridden_bike
+
+        expect(total_rides).to eq(3)
+
+      end
+
+      it "it shows least ridden bike" do
+        least_ridden_bike = Trip.least_ridden_bike
+
+        expect(least_ridden_bike).to eq(@bike_2.id)
+      end
+
+      it "it shows total number of rides for least ridden bike" do
+        total_rides = Trip.total_rides_for_least_ridden_bike
+
+        expect(total_rides).to eq(1)
+      end
 
   end
 end

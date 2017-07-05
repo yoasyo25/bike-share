@@ -39,12 +39,42 @@ class Trip < ActiveRecord::Base
     trip_by_station = Trip.group(:end_station).count
     most_trips = trip_by_station.max_by {|k,v| v}
     Station.find(most_trips[0]).name
-    # Station with the most rides as an ending place.
   end
 
   def self.monthly_subtotal_of_trips_per_year
+
     # Month by Month breakdown of number of rides with subtotals for each year.
   end
 
+  #refactor with just AR?
+
+  def self.most_ridden_bike
+    trips_by_bike = Trip.group(:bike_id).count
+    most_trips = trips_by_bike.max_by { |bike_id, trips| trips }.first
+  end
+
+  def self.total_rides_for_most_ridden_bike
+    trips_by_bike = Trip.group(:bike_id).count
+    most_trips = trips_by_bike.max_by { |bike_id, trips| trips }.last
+  end
+
+  def self.least_ridden_bike
+    Trip.group(:bike_id).count.min_by { |bike_id, trips| trips }.first
+  end
+
+  def self.total_rides_for_least_ridden_bike
+    Trip.group(:bike_id).count.min_by { |bike_id, trips| trips }.last
+  end
+
+  def self.date_with_most_trips
+    BikeDate.find(Trip.group(:start_date).order("count_id asc").count(:id).keys.last).date
+  end
+
+  def self.number_of_trips_on_day_with_most_trips
+    Trip.group(:start_date).order("count_id asc").count(:id).values.last
+
+  end
+
+  end
 
 end

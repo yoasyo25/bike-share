@@ -24,7 +24,7 @@ RSpec.describe Subscription do
       expect(customers).to eq(2)
     end
 
-    it "shows percentage of subscribed customers" do
+    it "shows percentage of subscribers and customers" do
 
       subscribers = Subscription.percentage_of_subscribers
       customers = Subscription.percentage_of_customers

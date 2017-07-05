@@ -40,29 +40,5 @@ RSpec.describe Bike do
     end
   end
 
-  # describe "Class methods" do
-  #   it "shows most ridden bike" do
-  #     most_ridden_bike = Bike.most_ridden_bike
-  #
-  #     expect(most_ridden_bike).to eq(@bike_1)
-  #   end
-  #
-  #   it "it shows total number of rides for most ridden bike" do
-  #     total_rides = Bike.total_rides_for_most_ridden_bike
-  #
-  #     expect(total_rides).to eq(2)
-  #   end
-  #
-  #   it "it shows least ridden bike" do
-  #     least_ridden_bike = Bike.least_ridden_bike
-  #
-  #     expect(least_ridden_bike).to eq(@bike_2)
-  #   end
-  #
-  #   it "it shows total number of rides for least ridden bike" do
-  #     total_rides = Bike.total_rides_for_least_ridden_bike
-  #
-  #     expect(total_rides).to eq(1)
-  #   end
 
   end
