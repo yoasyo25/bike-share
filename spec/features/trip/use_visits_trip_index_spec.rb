@@ -54,4 +54,6 @@ RSpec.describe "User visits Trips page" do
     expect(page).to have_content("All Trips")
   end
 
+  #should add tests for pagination and ordered by date
+
 end
