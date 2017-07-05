@@ -57,8 +57,6 @@ def seed_trips_database(file_path)
 
   csv.each do |row|
 
-    # no more of this nonsense - just don't assign trip with that attribute
-
     Trip.transaction do
 
     starting_station = Station.find_by(station_id: row[:start_station_id]).id
