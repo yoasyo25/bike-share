@@ -1,8 +1,5 @@
 <h1>Trips</h1>
 
-<p><a href="/trips">All Trips</a> | <a href="/trips/new">Create New Trip</a> | <a href="/">Home</a></p>
-
-
 <div class="container">
 
   <table class="table">
@@ -16,15 +13,16 @@
     </thead>
 
     <tbody>
-    <% @stations.each do |station| %>
+    <% @trips.each do |trip| %>
       <tr>
-        <th scope="row"><%= station.id %></th>
-          <td><a href="/stations/<%= station.id %>"><%= station.name %></a></td>
-          <td><%= station.dock_count %></td>
-          <td><%= station.city_id %></td>
-          <td><%= station.installation_date %></td>
-          <td><button type="button"><a href="/stations/<%= station.id %>/edit">Edit</a></button></td>
-          <td><form action="/stations/<%= station.id %>" method="post">
+        <th scope="row"><%= trip.id %></th>
+          <td><a href="/trips/<%= trip.id %>"><%= trip.id %></a></td>
+          <td><%= Station.find(trip.start_station) %></td>
+          <td><%= Date.find(trip.start_date) %></td>
+          <td><%= Station.find(trip.end_station) %></td>
+          <td><%= trip.duration %></td>
+          <td><button type="button"><a href="/trips/<%= trip.id %>/edit">Edit</a></button></td>
+          <td><form action="/trips/<%= trip.id %>" method="post">
             <input type="hidden" name="_method" value="DELETE" />
             <input type="submit" value="Delete" />
             </form></td>
