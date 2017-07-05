@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1>Station Dashboard</h1>
 
 <div class="album">
@@ -25,10 +26,10 @@
     </div>
 
   <div class="col-md-6">
-    <h3>Stations With least Bikes</h3>
+    <h3>Stations With Least Bikes</h3>
     <select class="" name="stations[name]">
       <% Station.stations_with_least_bikes_available.each do |station| %>
-      <option value=<%= station.id %>><%= station.name %></option>
+        <option value=<%= station.id %>><%= station.name %></option>
       <% end %>
     </select>
     <h5>Number of Bikes: <%= Station.least_available %></h5>
@@ -40,7 +41,7 @@
    </div>
 
     <div class="col-md-6">
-      <h3>Oldest Station</h3>
+      <h3>Oldest Stations</h3>
       <h4> <% (Station.oldest_installed_station).each  do |station| %>
       <%= station.name + " " %>
       <% end %></h4>

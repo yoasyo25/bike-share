@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170701215843) do
+ActiveRecord::Schema.define(version: 14) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bike_dates", force: :cascade do |t|
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bikes", force: :cascade do |t|
+    t.integer  "bike"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "cities", force: :cascade do |t|
     t.string   "city"
@@ -28,6 +40,34 @@ ActiveRecord::Schema.define(version: 20170701215843) do
     t.string   "installation_date"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "station_id"
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.string   "subscription_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.integer  "duration"
+    t.integer  "start_date"
+    t.integer  "station_id"
+    t.integer  "end_date"
+    t.integer  "end_station"
+    t.integer  "bike_id"
+    t.integer  "subscription_type"
+    t.integer  "zip_code"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["station_id"], name: "index_trips_on_station_id", using: :btree
+  end
+
+  create_table "zip_codes", force: :cascade do |t|
+    t.bigint   "zip_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "trips", "stations"
 end
