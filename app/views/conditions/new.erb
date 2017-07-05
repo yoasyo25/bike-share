@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title> New Weather Condition Day </title>
+  </head>
+  <body>
+    <h1>Create New Weather Condition Day</h1>
+
+    <p><a href="/stations">All Stations</a> | <a href="/trips">All Trips</a> | <a href="/conditions">All Weather Conditions </a> | <a href="/">Home</a></p>
+
+    <form class="" action="/conditions" method="post">
+
+      <label for="">Date:</label>
+        <p><input type="date" name="condition[date]" value=""></p>
+
+      <label for="">Max Temp:</label>
+        <p><input type="integer" name="condition[max_temp]" value=""></p>
+
+      <label for="">Min Temp:</label>
+        <p><input type="integer" name="condition[min_temp]" value=""></p>
+
+      <label for="">Mean Temp:</label>
+        <p><input type="integer" name="condition[mean_temp]" value=""></p>
+
+      <label for="">Mean Humidity:</label>
+        <p><input type="integer" name="condition[mean_humidity]" value=""></p>
+
+      <label for="">Mean Visibility:</label>
+        <p><input type="integer" name="condition[mean_visibility]" value=""></p>
+
+      <label for="">Mean Wind Speed:</label>
+        <p><input type="integer" name="condition[mean_wind_speed]" value=""></p>
+
+      <label for="">Precipitation:</label>
+        <p><input type="integer" name="condition[precipitation]" value=""></p>
+
+      <p><input type="submit" name="submit" value="Create New Weather Condition Day" /></p>
+    </form>
+  </body>
+</html>

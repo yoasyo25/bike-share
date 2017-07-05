@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title> Weather Condition Day <%= @condition.id %> </title>
+  </head>
+
+  <h1><%= @condition.date %></h1>
+
+  <p><a href="/">Home</a> | <a href="/conditions">All Stations</a> | <a href="/trips">All Trips</a> | <a href="/conditions">All Conditions</a> | <a href="#">Edit</a> | <a href="#">Delete</a></p>
+
+  <body>
+    <div class="container">
+
+      <table class="table">
+
+        <thead>
+          <th>Max Temp</th>
+          <th>Min Temp</th>
+          <th>Mean Temp</th>
+          <th>Mean Humidity</th>
+          <th>Mean Visibility</th>
+          <th>Mean Wind Speed</th>
+          <th>Precipitation</th>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope="row>"><%= @condition.id %></th>
+              <td><%= @condition.max_temp %></td>
+              <td><%= @condition.min_temp %></td>
+              <td><%= @condition.mean_temp %></td>
+              <td><%= @condition.mean_humidity %></td>
+              <td><%= @condition.mean_visibility %></td>
+              <td><%= @condition.mean_wind_speed %></td>
+              <td><%= @condition.precipitation %></td>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

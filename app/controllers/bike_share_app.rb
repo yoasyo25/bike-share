@@ -4,6 +4,7 @@ class BikeShareApp < Sinatra::Base
     @stations = Station.all
     @city = City.all
     @trips = Trip.all
+    @conditions = Weather.all
     nil
   end
 
@@ -92,5 +93,46 @@ class BikeShareApp < Sinatra::Base
   #   # Trip.destroy(id.to_i)
   #   redirect '/trips'
   # end
+
+  get '/conditions' do
+    files
+    erb :"conditions"
+  end
+
+  get '/conditions/new' do
+    files
+    erb :"conditions/new"
+  end
+
+  get '/conditions/:id' do
+    files
+    @weather = Weather.find(params[:id])
+    erb :"conditions/show"
+  end
+
+  get '/conditions/:id/edit' do
+    files
+    @weather = Weather.find(params[:id])
+    erb :"conditions/edit"
+  end
+
+  put '/conditions/:id' do |id|
+    @weather = Weather.update(id.to_i, params[:weather])
+    redirect "/conditions/#{id}"
+  end
+
+  post '/conditions' do
+    if params[:weather][:date] == "" || params[:weather][:mean_temp] == 0
+      erb :"stations/error"
+    else
+      @weather = Weather.create(params[:weather])
+      redirect "/conditions/#{@weather.id}"
+    end
+  end
+
+  delete '/conditions/:id' do |id|
+    Weather.destroy(id.to_i)
+    redirect '/conditions'
+  end
 
 end
