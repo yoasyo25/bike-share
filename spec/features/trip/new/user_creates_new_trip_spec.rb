@@ -14,15 +14,6 @@ RSpec.describe "User creates a new trip" do
     expect(page).to have_content("Zip Code")
   end
 
-  it "gets an error when submitting a form without all fields filled" do
-
-    visit '/trips/new'
-
-    find_button("Create New Trip").click
-
-    expect(page).to have_content("ERROR")
-  end
-
   it "sees a link to all trips, all stations, and the home page" do
 
     visit '/trips/new'

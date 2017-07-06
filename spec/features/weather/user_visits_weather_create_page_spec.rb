@@ -28,8 +28,8 @@ RSpec.describe "User creates a new weather day and" do
     visit '/conditions/new'
 
     page.should have_selector(:link_or_button, 'All Stations')
-    page.should have_selector(:link_or_button, 'All Trips'
-    page.should have_selector(:link_or_button, 'All Weather Days')
+    page.should have_selector(:link_or_button, 'All Trips')
+    page.should have_selector(:link_or_button, 'All Weather Conditions')
     page.should have_selector(:link_or_button, 'Home')
   end
 end

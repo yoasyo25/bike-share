@@ -1,7 +1,7 @@
 RSpec.describe Subscription do
   describe "Validations" do
     it "is invalid without a subscription type" do
-      subscription = Subscription.create
+      subscription = Subscription.create(subscription_type: nil)
 
       expect(subscription).to_not be_valid
     end
@@ -24,14 +24,13 @@ RSpec.describe Subscription do
       expect(customers).to eq(2)
     end
 
-    it "shows percentage of subscribed customers" do
+    it "shows percentage of subscribers and customers" do
 
       subscribers = Subscription.percentage_of_subscribers
       customers = Subscription.percentage_of_customers
 
       expect(subscribers).to eq("50%")
       expect(customers).to eq("50%")
-
     end
   end
 end

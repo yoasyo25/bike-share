@@ -3,6 +3,7 @@
 <h4><a href="/conditions/new">Create New Weather Condition</a></h4>
 <br/>
 
+
 <div class="container">
 
   <table class="table">
@@ -31,7 +32,7 @@
           <td><%= condition.mean_visibility %></td>
           <td><%= condition.mean_wind_speed %></td>
           <td><%= condition.precipitation %></td>
-          <td><button type="button"><a href="/conditions/<%= condition.id %>/edit">Edit</a></button></td>
+          <td><button type="button"><a href="/conditions/<%= condition.id %>/edit">Edit Weather</a></button></td>
           <td><form action="/conditions/<%= condition.id %>" method="post">
             <input type="hidden" name="_method" value="DELETE" />
             <input type="submit" value="Delete" />

@@ -29,6 +29,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips-dashboard' do
+
     erb :trips_dashboard
   end
 
@@ -50,7 +51,7 @@ class BikeShareApp < Sinatra::Base
 
   get '/trips/:id' do
     files
-    # @trip = Trip.find(params[:id])
+    @trip = Trip.find(params[:id])
     erb :"trips/show"
   end
 
@@ -62,21 +63,24 @@ class BikeShareApp < Sinatra::Base
 
   get '/trips/:id/edit' do
     files
-    # @trip = Trip.find(params[:id])
+    @trip = Trip.find(params[:id])
     erb :'trips/edit'
   end
 
   put '/stations/:id' do |id|
+    files
     @station = Station.update(id.to_i, params[:station])
     redirect "/stations/#{id}"
   end
 
   put '/trips/:id' do |id|
+    files
     @trip = Trip.update(id.to_i, params[:trip])
     redirect "/trips/#{id}"
   end
 
   post '/stations' do
+    files
     if params[:station][:name] == "" || params[:station][:dock_count] == 0
       @fields = params[:station].select {|key, value| key if value == ""}
       erb :"stations/error"
@@ -91,10 +95,10 @@ class BikeShareApp < Sinatra::Base
     redirect '/stations'
   end
 
-  # delete '/trips/:id' do |id|
-  #   # Trip.destroy(id.to_i)
-  #   redirect '/trips'
-  # end
+  delete '/trips/:id' do |id|
+    Trip.destroy(id.to_i)
+    redirect '/trips'
+  end
 
   get '/conditions' do
     files
@@ -108,6 +112,7 @@ class BikeShareApp < Sinatra::Base
 
   get '/conditions/:id' do
     files
+
     @condition = Condition.find(params[:id])
     erb :"conditions/show"
   end
@@ -119,12 +124,15 @@ class BikeShareApp < Sinatra::Base
   end
 
   put '/conditions/:id' do |id|
-    @weather = Condition.update(id.to_i, params[:weather])
+    files
+    @condition = Condition.update(id.to_i, params[:condition])
+
     redirect "/conditions/#{id}"
   end
 
   post '/conditions' do
-    if params[:weather][:date] == "" || params[:weather][:mean_temp] == 0
+    files
+    if params[:condition][:date] == "" || params[:condition][:mean_temp] == 0
       erb :"stations/error"
     else
       @weather = Condition.create(params[:weather])

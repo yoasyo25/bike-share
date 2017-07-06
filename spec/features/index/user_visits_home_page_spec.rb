@@ -17,6 +17,6 @@ RSpec.describe "User visits Home page" do
 
     visit '/'
 
-    expect(page).to have_content("Welcome to Bike Share App")
+    expect(page).to have_content("Bike Share App")
   end
 end
