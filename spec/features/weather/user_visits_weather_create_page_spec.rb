@@ -15,7 +15,6 @@ RSpec.describe "User creates a new weather day and" do
 
   it "doesn't fill in all fields and gets an error message" do
     visit '/conditions/new'
-
     fill_in "weather[name]", with: "2017-04-18"
     fill_in "weather[max_temp]", with: 75.0
     fill_in "weather[min_temp]", with: 71.0

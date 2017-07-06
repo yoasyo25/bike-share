@@ -5,7 +5,7 @@ class BikeShareApp < Sinatra::Base
     @stations = Station.all
     @city = City.all
     @trips = Trip.all
-    @conditions = Weather.all
+    # @conditions = Weather.all
     nil
   end
 
