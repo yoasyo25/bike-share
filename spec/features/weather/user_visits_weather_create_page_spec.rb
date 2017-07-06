@@ -24,7 +24,7 @@ RSpec.describe "User creates a new weather day and" do
     expect(page).to have_content("ERROR")
   end
 
-  it "sees a link to all weather, trips, stations, and home"
+  it "sees a link to all weather, trips, stations, and home" do
     visit '/conditions/new'
 
     page.should have_selector(:link_or_button, 'All Stations')
