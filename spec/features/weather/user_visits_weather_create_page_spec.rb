@@ -23,5 +23,4 @@ RSpec.describe "User creates a new weather day and" do
 
     expect(page).to have_content("ERROR")
   end
-
 end
