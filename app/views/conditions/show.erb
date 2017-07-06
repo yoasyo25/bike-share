@@ -4,9 +4,7 @@
     <title> Weather Condition Day <%= @condition.id %> </title>
   </head>
 
-  <h1><%= @condition.date %></h1>
-
-  <p><a href="/">Home</a> | <a href="/conditions">All Stations</a> | <a href="/trips">All Trips</a> | <a href="/conditions">All Conditions</a> | <a href="#">Edit</a> | <a href="#">Delete</a></p>
+  <h1><%= @condition.date_id %></h1>
 
   <body>
     <div class="container">
@@ -14,6 +12,7 @@
       <table class="table">
 
         <thead>
+          <th>ID #</th>
           <th>Max Temp</th>
           <th>Min Temp</th>
           <th>Mean Temp</th>

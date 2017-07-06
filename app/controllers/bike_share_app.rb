@@ -5,12 +5,12 @@ class BikeShareApp < Sinatra::Base
     @stations = Station.all
     @city = City.all
     @trips = Trip.all
-    # @conditions = Weather.all
+    @conditions = Condition.all
     nil
   end
 
   get '/' do
-    erb :stations_dashboard
+    erb :index
   end
 
   get '/stations' do
@@ -20,18 +20,17 @@ class BikeShareApp < Sinatra::Base
 
   get '/trips' do
     files
-    # @trips = Trip.paginate(:page => params[:page], :per_page => 30)
-    @trips = Trip.all
+    @trips = Trip.paginate(:page => params[:page], :per_page => 30)
     erb :"trips/index"
   end
 
-  get '/stations/stations-dashboard' do
+  get '/stations-dashboard' do
     erb :stations_dashboard
   end
 
-  # get '/trips/trips-dashboard' do
-  #   erb :trips_dashboard
-  # end
+  get '/trips-dashboard' do
+    erb :trips_dashboard
+  end
 
   get '/stations/new' do
     files
@@ -99,7 +98,7 @@ class BikeShareApp < Sinatra::Base
 
   get '/conditions' do
     files
-    erb :"conditions"
+    erb :"conditions/index"
   end
 
   get '/conditions/new' do
@@ -109,18 +108,18 @@ class BikeShareApp < Sinatra::Base
 
   get '/conditions/:id' do
     files
-    @weather = Weather.find(params[:id])
+    @condition = Condition.find(params[:id])
     erb :"conditions/show"
   end
 
   get '/conditions/:id/edit' do
     files
-    @weather = Weather.find(params[:id])
+    @condition = Condition.find(params[:id])
     erb :"conditions/edit"
   end
 
   put '/conditions/:id' do |id|
-    @weather = Weather.update(id.to_i, params[:weather])
+    @weather = Condition.update(id.to_i, params[:weather])
     redirect "/conditions/#{id}"
   end
 
@@ -128,14 +127,19 @@ class BikeShareApp < Sinatra::Base
     if params[:weather][:date] == "" || params[:weather][:mean_temp] == 0
       erb :"stations/error"
     else
-      @weather = Weather.create(params[:weather])
+      @weather = Condition.create(params[:weather])
       redirect "/conditions/#{@weather.id}"
     end
   end
 
   delete '/conditions/:id' do |id|
-    Weather.destroy(id.to_i)
+    Condition.destroy(id.to_i)
     redirect '/conditions'
+  end
+
+  get '/weather-dashboard' do
+    files
+    erb :weather_dashboard
   end
 
 end

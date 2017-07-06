@@ -1,3 +1,6 @@
+require 'will_paginate'
+require 'will_paginate/active_record'
+
 class Trip < ActiveRecord::Base
   belongs_to :starting_station, :class_name => "Station", :foreign_key => :start_station
   belongs_to :starting_date, :class_name => "BikeDate", :foreign_key => :start_date

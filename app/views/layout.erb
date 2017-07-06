@@ -50,76 +50,29 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Bike Share App</a>
+          <a href="/" class="navbar-brand">Bike Share App</a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/">Home</a></li>
-            <li><a href="/stations">All Stations</a></li>
-            <li><a href="/trips">All Trips</a></li>
-            <li><a href="/stations/new">Create New Station</a></li>
-            <li><a href="/trips/new">Create New Trips</a></li>
+            <li><a href="/stations">Stations</a></li>
+            <li><a href="/trips">Trips</a></li>
+            <li><a href="/conditions">Weather Conditions</a></li>
+            <li><a href="/stations-dashboard">Station Dashboard</a></li>
+            <li><a href="/trips-dashboard">Trip Dashboard</a></li>
+            <li><a href="/weather-dashboard">Weather Dashboard</a></li>
           </ul>
         </div>
 
       </div>
     </nav>
 
-    <div class="container-fluid">
-
-      <div class="row">
-
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="/about_bike_share">About Bike Share <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-          </ul>
-        </div>
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
           <div class="container-fluid text-center">
             <%= yield %>
           </div>
 
-          <h2 class="sub-header">Stations</h2>
 
-          <div class="table-responsive">
-
-            <table class="table table-striped">
-
-              <thead>
-                <tr>
-                  <th>Station ID</th>
-                  <th>Station Name</th>
-                  <th>Docks</th>
-                  <th>City</th>
-                  <th>Installation Date</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <% Station.all.each do |station| %>
-                  <tr>
-                    <th scope="row"><%= station.id %></th>
-                      <td><a href="/stations/<%= station.id %>"><%= station.name %></a></td>
-                      <td><%= station.dock_count %></td>
-                      <td><%= station.city %></td>
-                      <td><%= station.installation_date %></td>
-                <% end %>
-              </tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
