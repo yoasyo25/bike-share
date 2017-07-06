@@ -15,6 +15,7 @@ class Trip < ActiveRecord::Base
   validates :bike_id, presence: true
   validates :subscription_type, presence: true
 
+#trip-dashboard
 
   def self.average_duration_of_a_ride
     average(:duration)
@@ -46,8 +47,6 @@ class Trip < ActiveRecord::Base
     # Month by Month breakdown of number of rides with subtotals for each year.
   end
 
-  #refactor with just AR?
-
   def self.most_ridden_bike
     trips_by_bike = Trip.group(:bike_id).count
     most_trips = trips_by_bike.max_by { |bike_id, trips| trips }.first
@@ -72,9 +71,32 @@ class Trip < ActiveRecord::Base
 
   def self.number_of_trips_on_day_with_most_trips
     Trip.group(:start_date).order("count_id asc").count(:id).values.last
-
   end
 
+  def self.date_with_least_trips
+    BikeDate.find(Trip.group(:start_date).order("count_id desc").count(:id).keys.last).date
+  end
+
+  def self.number_of_trips_on_day_with_least_trips
+    Trip.group(:start_date).order("count_id desc").count(:id).values.last
+  end
+
+  #Ind station show page
+
+  def self.trips_from_starting(station_id)
+    Trip.where(start_station: station_id).count
+  end
+
+  def self.trips_from_ending(station_id)
+    Trip.where(end_station: station_id).count
+  end
+
+  def self.most_frequent_destination_from(station_id)
+    all_ends = Trip.where(start_station: station_id).map { |station| station.end_station}
+    all_ends.max_by{|set| all_ends.count(set)}
+    end
+
+  def self.most_frequent_origin_for_rides_ending_at(station)
   end
 
 end
