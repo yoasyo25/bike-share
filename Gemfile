@@ -9,8 +9,7 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'pry'
 gem 'pry-state'
 gem 'pry-byebug'
-gem 'rake', '~> 11.2', '>= 11.2.2'
-gem "sqlite3"
+gem 'rake'
 
 
 group :development, :test do
@@ -23,5 +22,3 @@ group :development, :test do
   gem 'rack-test'
   gem 'database_cleaner'
 end
-gem 'rspec'
-gem 'faker'
