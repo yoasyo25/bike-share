@@ -126,19 +126,13 @@ RSpec.describe Trip do
 
         expect(most_rides_begun).to eq(@start_station.name)
       end
-    #
+
       it "shows the station where the most rides ended" do
         most_rides_ending = Trip.end_station_with_most_rides
 
         expect(most_rides_ending).to eq(@end_station.name)
       end
-    #
-    #   it "shows month by month breakdown of rides wiht subtotals for each year" do
-    #     monthly_breakdown_of_rides_per_year = Trip.monthly_subtotal_of_trips_per_year
-    #
-    #     expect(monthly_breakdown_of_rides_per_year).to eq("?????")
-    #   end
-
+  
       it "shows most ridden bike" do
         most_ridden_bike = Trip.most_ridden_bike
 

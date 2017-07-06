@@ -42,9 +42,9 @@ class Trip < ActiveRecord::Base
     Station.find(most_trips[0]).name
   end
 
-  def self.monthly_subtotal_of_trips_per_year
-
-    # Month by Month breakdown of number of rides with subtotals for each year.
+  def self.monthly_subtotal_of_trips_per_year #needs to be iterated over in view for month and year
+    by_month = BikeDate.group("DATE_TRUNC('month', date)").count
+    by_month.sort
   end
 
   def self.most_ridden_bike
