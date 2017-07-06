@@ -33,7 +33,7 @@ RSpec.describe Trip do
                                       city_id: city.id, installation_date: "2017-08-30")
       station_2 = Station.create(name: "San Jose Civic Center", dock_count: 11,
                                     city_id: city.id, installation_date: "2017-08-30")
-      trip = Trip.create(duration: 174, start_date: "8/29/2013", start_station: station_2.id,
+      trip = Trip.create(duration: 174, start_date: "8/29/2013",
                           end_station: station_1.id, end_date: "8/29/2013",
                           bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
 

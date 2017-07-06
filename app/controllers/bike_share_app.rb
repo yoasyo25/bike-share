@@ -5,12 +5,13 @@ class BikeShareApp < Sinatra::Base
     @stations = Station.all
     @city = City.all
     @trips = Trip.all
-    @conditions = Weather.all
+    @conditions = Condition.all
     nil
   end
 
   get '/' do
-    erb :stations_dashboard
+    files
+    erb :'stations/index'
   end
 
   get '/stations' do
@@ -20,18 +21,19 @@ class BikeShareApp < Sinatra::Base
 
   get '/trips' do
     files
-    # @trips = Trip.paginate(:page => params[:page], :per_page => 30)
-    @trips = Trip.all
+    # @trip_pag = Trip.paginate(:page => params[:page], :per_page => 30)
     erb :"trips/index"
   end
 
   get '/stations/stations-dashboard' do
+    files
     erb :stations_dashboard
   end
 
-  # get '/trips/trips-dashboard' do
-  #   erb :trips_dashboard
-  # end
+  get '/trips/trips-dashboard' do
+    files
+    erb :trips_dashboard
+  end
 
   get '/stations/new' do
     files
@@ -51,7 +53,7 @@ class BikeShareApp < Sinatra::Base
 
   get '/trips/:id' do
     files
-    # @trip = Trip.find(params[:id])
+    @trip = Trip.find(params[:id])
     erb :"trips/show"
   end
 
@@ -63,21 +65,24 @@ class BikeShareApp < Sinatra::Base
 
   get '/trips/:id/edit' do
     files
-    # @trip = Trip.find(params[:id])
+    @trip = Trip.find(params[:id])
     erb :'trips/edit'
   end
 
   put '/stations/:id' do |id|
+    files
     @station = Station.update(id.to_i, params[:station])
     redirect "/stations/#{id}"
   end
 
   put '/trips/:id' do |id|
+    files
     @trip = Trip.update(id.to_i, params[:trip])
     redirect "/trips/#{id}"
   end
 
   post '/stations' do
+    files
     if params[:station][:name] == "" || params[:station][:dock_count] == 0
       @fields = params[:station].select {|key, value| key if value == ""}
       erb :"stations/error"
@@ -92,14 +97,14 @@ class BikeShareApp < Sinatra::Base
     redirect '/stations'
   end
 
-  # delete '/trips/:id' do |id|
-  #   # Trip.destroy(id.to_i)
-  #   redirect '/trips'
-  # end
+  delete '/trips/:id' do |id|
+    Trip.destroy(id.to_i)
+    redirect '/trips'
+  end
 
   get '/conditions' do
     files
-    erb :"conditions"
+    erb :"conditions/index"
   end
 
   get '/conditions/new' do
@@ -109,32 +114,34 @@ class BikeShareApp < Sinatra::Base
 
   get '/conditions/:id' do
     files
-    @weather = Weather.find(params[:id])
+    @weather = Condition.find(params[:id])
     erb :"conditions/show"
   end
 
   get '/conditions/:id/edit' do
     files
-    @weather = Weather.find(params[:id])
+    @condition = Condition.find(params[:id])
     erb :"conditions/edit"
   end
 
   put '/conditions/:id' do |id|
-    @weather = Weather.update(id.to_i, params[:weather])
+    files
+    @condition = Condition.update(id.to_i, params[:condition])
     redirect "/conditions/#{id}"
   end
 
   post '/conditions' do
-    if params[:weather][:date] == "" || params[:weather][:mean_temp] == 0
+    files
+    if params[:condition][:date] == "" || params[:condition][:mean_temp] == 0
       erb :"stations/error"
     else
-      @weather = Weather.create(params[:weather])
+      @weather = Condition.create(params[:weather])
       redirect "/conditions/#{@weather.id}"
     end
   end
 
   delete '/conditions/:id' do |id|
-    Weather.destroy(id.to_i)
+    Condition.destroy(id.to_i)
     redirect '/conditions'
   end
 

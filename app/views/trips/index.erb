@@ -29,7 +29,7 @@
           <td><%= trip.end_station %></td>
           <td><%= trip.bike_id %></td>
           <td><%= trip.subscription_type %></td>
-          <td><%= trip.zipcode %></td>
+          <td><%= trip.zip_code %></td>
           <td><button type="button"><a href="/trips/<%= trip.id %>/edit">Edit</a></button></td>
           <td><form action="/trips/<%= trip.id %>" method="post">
             <input type="hidden" name="_method" value="DELETE" />

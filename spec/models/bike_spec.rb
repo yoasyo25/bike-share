@@ -11,7 +11,7 @@ RSpec.describe Bike do
 
       expect(bike).to_not be_valid
     end
-
+  end
   describe "Class methods" do
 
     it "shows most ridden bike" do
@@ -39,3 +39,4 @@ RSpec.describe Bike do
     end
 
   end
+end
