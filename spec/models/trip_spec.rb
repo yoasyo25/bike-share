@@ -200,13 +200,36 @@ RSpec.describe Trip do
         expect(num_of_rides).to eq(1)
       end
 
-      it "shows most frequent destination from this station"
+      it "shows most frequent destination from this station" do
         destination = Trip.most_frequent_destination_from(@start_station.id)
 
         expect(destination).to eq("San Pedro")
       end
 
-      it "shows most frequent origin form rides ending at this station"
+      it "shows most frequent origin form rides ending at this station" do
+        destination = Trip.most_frequent_origin_for_rides_ending_at(@end_station.id)
+
+        expect(destination).to eq("Civic Center")
       end
+
+      it "shows date with hightest number of trips from this station" do
+        day = Trip.date_for_highest_number_of_trips_from(@start_station.id)
+
+        expect(day).to eq("2014-04-05 10:16:00 UTC")
+      end
+
+      it "shows most frequently used zip code for users from this station" do
+        zip_code = Trip.frequently_used_zip_code_for_users_from(@start_station.id)
+
+        expect(zip_code).to eq(99999)
+      end
+
+      it "shows most frequently used bike id from this station" do
+        bike_id = Trip.frequently_used_bike_id_from(@start_station.id)
+
+        expect(bike_id).to eq(1)
+      end
+
+
   end
 end
