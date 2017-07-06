@@ -13,19 +13,18 @@ RSpec.describe "User creates a new weather day and" do
     expect(page).to have_content("Precipitation")
   end
 
-  # it "doesn't fill in all fields and gets an error message" do
-  #   visit '/conditions/new'
-  #
-  #   fill_in "condition[date]", with: "2017-04-18"
-  #   fill_in "condition[max_temp]", with: 75.0
-  #   fill_in "condition[min_temp]", with: 71.0
-  #
-  #   find_button("Create New Weather Condition Day").click
-  #
-  #   expect(page).to have_content("ERROR")
-  # end
+  it "doesn't fill in all fields and gets an error message" do
+    visit '/conditions/new'
+    fill_in "weather[name]", with: "2017-04-18"
+    fill_in "weather[max_temp]", with: 75.0
+    fill_in "weather[min_temp]", with: 71.0
 
-  it "sees a link to all weather, trips, stations, and home" do
+    find_button("Create New Weather Day").click
+
+    expect(page).to have_content("ERROR")
+  end
+
+  it "sees a link to all weather, trips, stations, and home"
     visit '/conditions/new'
 
     page.should have_selector(:link_or_button, 'All Stations')

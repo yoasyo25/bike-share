@@ -10,8 +10,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/' do
-    files
-    erb :'stations/index'
+    erb :index
   end
 
   get '/stations' do
@@ -21,17 +20,16 @@ class BikeShareApp < Sinatra::Base
 
   get '/trips' do
     files
-    # @trip_pag = Trip.paginate(:page => params[:page], :per_page => 30)
+    @trips = Trip.paginate(:page => params[:page], :per_page => 30)
     erb :"trips/index"
   end
 
-  get '/stations/stations-dashboard' do
-    files
+  get '/stations-dashboard' do
     erb :stations_dashboard
   end
 
-  get '/trips/trips-dashboard' do
-    files
+  get '/trips-dashboard' do
+
     erb :trips_dashboard
   end
 
@@ -114,7 +112,8 @@ class BikeShareApp < Sinatra::Base
 
   get '/conditions/:id' do
     files
-    @weather = Condition.find(params[:id])
+
+    @condition = Condition.find(params[:id])
     erb :"conditions/show"
   end
 
@@ -127,6 +126,7 @@ class BikeShareApp < Sinatra::Base
   put '/conditions/:id' do |id|
     files
     @condition = Condition.update(id.to_i, params[:condition])
+
     redirect "/conditions/#{id}"
   end
 
@@ -143,6 +143,11 @@ class BikeShareApp < Sinatra::Base
   delete '/conditions/:id' do |id|
     Condition.destroy(id.to_i)
     redirect '/conditions'
+  end
+
+  get '/weather-dashboard' do
+    files
+    erb :weather_dashboard
   end
 
 end

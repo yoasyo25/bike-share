@@ -1,6 +1,6 @@
 <h1>Trip Index</h1>
 
-<p><a href="#">All Trips</a> | <a href="/trip/new">Create New Trip</a> | <a href="/">Home</a></p>
+<h4><a href="/trip/new">Create New Trip</a></h4>
 
 <div class="container">
 
@@ -22,10 +22,10 @@
     <% @trips.each do |trip| %>
       <tr>
         <th scope="row"><a href="/trips/<%= trip.id %>"><%= trip.id %></th>
-          <td><<%= trip.start_date %></a></td>
+          <td><%= trip.duration %></a></td>
+          <td><%= trip.start_date %></td>
+          <td><%= trip.start_station %></td  >
           <td><%= trip.end_date %></td>
-          <td><%= trip.duration %></td  >
-          <td><%= trip.start_station %></td>
           <td><%= trip.end_station %></td>
           <td><%= trip.bike_id %></td>
           <td><%= trip.subscription_type %></td>
@@ -41,5 +41,6 @@
 </table>
 
 <%= will_paginate @trips %>
+
 
 </div>
