@@ -13,7 +13,7 @@ RSpec.describe "User edits a weather day" do
 
     expect(current_path).to eq("/conditions/#{@weather_day.id}/edit")
 
-    fill_in "condition[date_id]", with: 1
+    fill_in "condition[date_id]", with: "2017-04-18"
     fill_in "condition[max_temp]", with: 75.0
     fill_in "condition[min_temp]", with: 71.0
     fill_in "condition[mean_temp]", with: 73.0
