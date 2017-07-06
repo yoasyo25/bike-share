@@ -8,7 +8,7 @@
 
     <p><a href="/stations">All Stations</a> | <a href="/trips">All Trips</a> | <a href="/">Home</a></p>
 
-    <form class="" action="/stations" method="post">
+    <form class="" action="/trips" method="post">
 
       <label for="">Duration:</label>
         <p><input type="integer" name="trip[duration]" value=""></p>
@@ -38,7 +38,7 @@
 
       <label for="">Subscription Type:</label>
         <p><select name="trip[subscription_type]">
-          <% @subscriptions.each do |subscription| %>
+          <% Subscription.all.each do |subscription| %>
             <option value="<% subscription.id %>"><%= subscription.name %></option>
             <% end %>
           </select></p>
@@ -46,7 +46,7 @@
       <label for="">Zip Code:</label>
         <p><input type="integer" name="trip[subscription_id]" value=""></p>
 
-      <p><input type="submit" name="submit" value="Create New Station" /></p>
+      <p><input type="submit" name="submit" value="Create New Trip" /></p>
     </form>
   </body>
 </html>

@@ -56,8 +56,11 @@ RSpec.describe Trip do
     end
 
     it "is invalid without a start station" do
-      trip = Trip.create(duration: 100, start_date: @start_date.id, end_date: @end_date.id,
+
+
+     trip = Trip.create(duration: 100, start_date: @start_date.id, end_date: @end_date.id,
         end_station: @end_station.id, bike_id: @bike_id.id, subscription_type: @subscription_type.id, zip_code: @zip_code.id)
+
 
       expect(trip).to_not be_valid
     end

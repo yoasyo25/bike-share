@@ -12,6 +12,7 @@ RSpec.describe Bike do
     @end_station = Station.create(name: "San Pedro", dock_count: 11,
     city_id: @city_2.id, installation_date: "2017-08-30")
 
+  
     @bike_1 = Bike.create(bike: 1)
     @bike_2 = Bike.create(bike: 2)
 
@@ -39,6 +40,4 @@ RSpec.describe Bike do
       expect(bike).to_not be_valid
     end
   end
-
-
-  end
+end
